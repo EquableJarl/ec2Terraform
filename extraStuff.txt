@@ -1,0 +1,12 @@
+ aws ec2 describe-images \                                                                                             ──(Mon,Feb20)─┘
+    --filter "Name=name, Values=amzn2*kernel*gp2" \
+    "Name=owner-alias, Values=amazon" --region eu-west-2 \
+    "Name=architecture, Values=x86_64" \
+    | jq '[.Images | sort_by(.CreationDate) | .[] | {Name: .Name, Created: .CreationDate, Id: .ImageId}] | reverse'
+
+
+    sudo amazon-linux-extras install nginx1
+
+    sudo systemctl start nginx.service
+
+    
